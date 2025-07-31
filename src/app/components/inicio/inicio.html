@@ -1,0 +1,30 @@
+<c-carousel>
+  <c-carousel-indicators />
+  <c-carousel-inner>
+    @for (slide of slides; track slide.src) {
+      <c-carousel-item>
+        <img
+          alt="{{slide.title}}"
+          class="d-block w-100"
+          loading="lazy"
+          src="{{slide.src}}"
+        />
+        <c-carousel-caption class="d-none d-md-block">
+          <h3>{{ slide.title }}</h3>
+          <p>{{ slide.subtitle }}</p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    }
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev" />
+  <c-carousel-control [routerLink] caption="Next" direction="next" />
+</c-carousel>
+
+<div class="container text-center">
+  <h2 class="mb-3">¿Quiénes somos?</h2>
+  <p class="lead">
+    Somos una empresa especializada en restablecimientos de contraseñas de dispositivos Hikvision. 
+    Ofrecemos un servicio remoto, rápido y sin complicaciones. Nos conectamos a través de AnyDesk y
+    garantizamos seguridad y profesionalismo.
+  </p>
+</div>

@@ -1,0 +1,15 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Contáctanos</h2>
+  <form (submit)="enviar()">
+    <div class="row mb-3">
+      <div class="col"><input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Nombre" required></div>
+      <div class="col"><input type="tel" [(ngModel)]="telefono" name="telefono" class="form-control" placeholder="Teléfono" required></div>
+    </div>
+    <div class="mb-3"><input type="email" [(ngModel)]="correo" name="correo" class="form-control" placeholder="Correo" required></div>
+    <div class="mb-3"><input type="number" [(ngModel)]="cantidad" name="cantidad" class="form-control" placeholder="Cantidad de dispositivos" required></div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success">Enviar por WhatsApp</button>
+    </div>
+  </form>
+</div>
