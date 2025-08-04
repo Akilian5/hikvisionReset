@@ -1,14 +1,27 @@
-<div class="container my-5">
-  <h2 class="text-center mb-4">Nuestros Productos</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let producto of productos">
-      <div class="card h-100 shadow-sm">
-        <img [src]="producto.img" class="card-img-top" alt="...">
+<section id="productos" class="container py-5">
+  <h2 class="text-center fw-bold text-danger mb-4">Productos Hikvision Compatibles</h2>
+
+  <!-- Filtro -->
+  <div class="text-center mb-4">
+    <button class="btn btn-outline-danger m-1" (click)="filtrar('todos')">Todos</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('intercomunicadores')">Intercomunicadores IP</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('alarmas')">Alarmas IP</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('cctv')">Línea CCTV</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('dvr')">DVR / NVR</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('camara')">Cámaras IP</button>
+    <button class="btn btn-outline-secondary m-1" (click)="filtrar('acceso')">Controles de acceso</button>
+  </div>
+
+  <!-- Productos -->
+  <div class="row gy-4 mt-3">
+    <div class="col-12" *ngFor="let producto of productosFiltrados">
+      <div class="card flex-row shadow-sm rounded-4 overflow-hidden border-0 animate__animated animate__fadeInUp">
+        <img [src]="producto.imagen" class="img-fluid" style="width: 300px; object-fit: cover;" alt="{{ producto.nombre }}">
         <div class="card-body">
-          <h5 class="card-title">{{ producto.titulo }}</h5>
-          <p class="card-text">{{ producto.descripcion }}</p>
+          <h5 class="card-title fw-bold text-dark">{{ producto.nombre }}</h5>
+          <p class="card-text text-muted">{{ producto.descripcion }}</p>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

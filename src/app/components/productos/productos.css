@@ -1,0 +1,19 @@
+#productos .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1.5rem;
+}
+
+#productos .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+#productos .btn {
+  border-radius: 999px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#productos .btn:hover {
+  transform: scale(1.05);
+}
