@@ -9,6 +9,7 @@
     body {
       background-color: #f9f9f9;
     }
+
     .step-box {
       background-color: #fff;
       border-radius: 10px;
@@ -17,100 +18,118 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
       transition: transform 0.3s ease;
     }
+
     .step-box:hover {
       transform: translateY(-5px);
     }
+
     .step-number {
       font-size: 2.5rem;
       font-weight: bold;
       color: #dc3545;
     }
+
     .note {
       font-size: 0.95rem;
       color: #6c757d;
       margin-top: 0.5rem;
     }
-    .section-title {
-      font-weight: 700;
-      margin-bottom: 1rem;
+
+    .step-img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 576px) {
+      .step-number {
+        font-size: 1.8rem;
+      }
+
+      .step-box {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="container py-5">
-    <h1 class="text-center mb-4 fw-bold">¿Cómo funciona?</h1>
-    <p class="text-center text-muted mb-5">Realizamos el procedimiento con estos sencillos pasos</p>
+  <div class="container-fluid py-5">
+    <div class="mx-auto px-3 px-sm-4 px-md-5 col-lg-10 col-xl-8">
+      <h1 class="text-center mb-4 fw-bold">¿Cómo funciona?</h1>
+      <p class="text-center text-muted mb-5">Realizamos el procedimiento con estos sencillos pasos</p>
 
-    <div class="step-box">
-      <h3 class="step-number">Nota previa</h3>
-      <p>Es importante que el dispositivo Hikvision y el computador estén conectados a través de cable o WiFi a la misma red.</p>
+      <!-- Nota Previa -->
+      <div class="step-box">
+        <h3 class="step-number">Nota previa</h3>
+        <p>Es importante que el dispositivo Hikvision y el computador estén conectados a través de cable o WiFi a la misma red.</p>
+      </div>
+
+      <div class="text-center my-3">
+        <img src="assets/img/Nota 1.jpg" alt="Ejemplo de ID en Anydesk" class="img-fluid rounded shadow step-img">
+      </div>
+
+      <!-- Paso 1 -->
+      <div class="step-box">
+        <h3 class="step-number">Paso 1</h3>
+        <p>
+          Debes tener descargado e instalado el software 
+          <a 
+            href="https://anydesk.com/es/downloads/windows" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="fw-semibold text-primary text-decoration-underline"
+          >
+            Anydesk
+          </a> 
+          en tu computador.
+        </p>
+      </div>
+
+      <div class="text-center my-3">
+        <img src="assets/img/Anydesk.jpg" alt="Anydesk" class="img-fluid rounded shadow step-img">
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="step-box">
+        <h3 class="step-number">Paso 2</h3>
+        <p>Indícanos tu <strong>ID de Anydesk</strong> y acepta la conexión remota que enviaremos.</p>
+      </div>
+
+      <div class="text-center my-3">
+        <img src="assets/img/ID_ANYDESK.jpg" alt="ID en Anydesk" class="img-fluid rounded shadow step-img">
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="step-box">
+        <h3 class="step-number">Paso 3</h3>
+        <p>Iniciamos el proceso de restablecimiento con archivo seguro, este paso tiene una duración máxima de 40 minutos.</p>
+        <p class="note">Nota: Realizar un restablecimiento de clave no afectará el funcionamiento del dispositivo ni se perderá información alguna.</p>
+      </div>
+
+      <div class="text-center my-3">
+        <img src="assets/img/restablecimiento.jpg" alt="restablecimiento" class="img-fluid rounded shadow step-img">
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="step-box">
+        <h3 class="step-number">Paso 4</h3>
+        <p>Confirmamos el cambio de contraseña ingresando a la versión web del dispositivo o agregándolo al software Batch Configuration.</p>
+      </div>
+
+      <div class="text-center my-3">
+        <img src="assets/img/hikvision.jpg" alt="Confirmación" class="img-fluid rounded shadow step-img">
+      </div>
+
+      <!-- Nota Final -->
+      <div class="step-box">
+        <h3 class="step-number">Nota final</h3>
+        <p>Tras restablecer el dispositivo, se asignará una contraseña provisional conocida únicamente por nuestro equipo.</p>
+        <p>La clave definitiva proporcionada por el cliente será configurada una vez confirmado el pago del servicio.</p>
+      </div>
     </div>
-
-    <div class="text-center my-3">
-    <img src="assets/img/Nota 1.jpg" alt="Ejemplo de ID en Anydesk" class="img-fluid rounded shadow" style="max-width: 600px;">
-    <p class="text-muted mt-2"></p>
   </div>
 
-    <div class="step-box">
-  <h3 class="step-number">Paso 1</h3>
-  <p>
-    Debes tener descargado e instalado el software 
-    <a 
-      href="https://anydesk.com/es/downloads/windows" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      class="fw-semibold text-primary text-decoration-underline"
-    >
-      Anydesk
-    </a> 
-    en tu computador.
-  </p>
-</div>
-
-    <div class="text-center my-3">
-    <img src="assets/img/Anydesk.jpg" alt="Anydesk" class="img-fluid rounded shadow" style="max-width: 600px;">
-    <p class="text-muted mt-2"></p>
-    </div>
-    
-  <div class="step-box">
-      <h3 class="step-number">Paso 2</h3>
-      <p>Indícanos tu <strong>ID de Anydesk</strong> y acepta la conexión remota que enviaremos.</p>
-    </div>
-
-    <div class="text-center my-3">
-    <img src="assets/img/ID_ANYDESK.jpg" alt="ID en Anydesk" class="img-fluid rounded shadow" style="max-width: 600px;">
-    <p class="text-muted mt-2"></p>
-  </div>
-
-    <div class="step-box">
-      <h3 class="step-number">Paso 3</h3>
-      <p>Iniciamos el proceso de restablecimiento con archivo seguro, este paso tiene una duración máxima de 40 minutos.</p>
-      <p class="note">Nota: Realizar un restablecimiento de clave no afectará el funcionamiento del dispositivo ni se perderá información alguna.</p>
-    </div>
-
-    <div class="text-center my-3">
-    <img src="assets/img/restablecimiento.jpg" alt="restablecimiento" class="img-fluid rounded shadow" style="max-width: 600px;">
-    <p class="text-muted mt-2"></p>
-  </div>
-
-    <div class="step-box">
-      <h3 class="step-number">Paso 4</h3>
-      <p>Confirmamos el cambio de contraseña ingresando a la versión web del dispositivo o agregándolo al software Batch Configuration.</p>
-    </div>
-
-    <div class="text-center my-3">
-    <img src="assets/img/hikvision.jpg" alt="" class="img-fluid rounded shadow" style="max-width: 600px;">
-    <p class="text-muted mt-2"></p>
-  </div>
-
-    <div class="step-box">
-      <h3 class="step-number">Nota final</h3>
-      <p>Tras restablecer el dispositivo, se asignará una contraseña provisional conocida únicamente por nuestro equipo.</p>
-      <p>La clave definitiva proporcionada por el cliente será configurada una vez confirmado el pago del servicio.</p>
-    </div>
-  </div>
-
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
