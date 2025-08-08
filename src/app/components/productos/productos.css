@@ -1,6 +1,8 @@
 #productos .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
 }
 
 #productos .card:hover {
@@ -16,4 +18,34 @@
 
 #productos .btn:hover {
   transform: scale(1.05);
+}
+
+/* Imagenes uniformes */
+#productos .card img {
+  width: 100%;
+  height: 220px;       /* Alto fijo */
+  object-fit: cover;   /* Recorte proporcional */
+}
+
+@media (min-width: 768px) {
+  #productos .card img {
+    height: 250px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #productos .card img {
+    height: 280px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
