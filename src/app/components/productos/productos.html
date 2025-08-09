@@ -1,25 +1,26 @@
 <section id="productos" class="container py-5">
-  <h2 class="text-center fw-bold text-danger mb-4">Productos Hikvision Compatibles</h2>
+  <h2 class="text-center fw-bold text-danger mb-4">Familias Hilook y Hikvision compatibles</h2>
 
   <!-- Filtro -->
   <div class="text-center mb-4">
     <button 
       *ngFor="let categoria of categorias"
-      class="btn m-1"
+      class="btn m-2 px-4 py-2"
       [ngClass]="categoriaSeleccionada === categoria.id ? 'btn-danger' : 'btn-outline-secondary'"
       (click)="filtrar(categoria.id)">
       {{ categoria.nombre }}
     </button>
   </div>
 
-  <!-- Productos -->
+  <!-- Productos como mosaico -->
   <div class="row gy-4 mt-3">
-    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let producto of productosFiltrados">
-      <div class="card shadow-sm rounded-4 overflow-hidden border-0 animate__animated animate__fadeInUp">
-        <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="card-img-top">
-        <div class="card-body text-center">
-          <h5 class="card-title fw-bold text-dark">{{ producto.nombre }}</h5>
-          <p class="card-text text-muted">{{ producto.descripcion }}</p>
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let producto of productosFiltrados">
+      <div class="card shadow border-0 overflow-hidden h-100 producto-card">
+        <div class="image-container">
+          <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="card-img-top">
+          <div class="overlay">
+            <h6 class="text-white fw-bold mb-0">{{ producto.nombre }}</h6>
+          </div>
         </div>
       </div>
     </div>

@@ -1,51 +1,108 @@
-#productos .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 1.5rem;
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-#productos .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
 #productos .btn {
-  border-radius: 999px;
-  font-weight: bold;
+  border-radius: 25px;
+  font-weight: 600;
   transition: all 0.3s ease;
+  border-width: 2px;
 }
 
 #productos .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagenes uniformes */
-#productos .card img {
+#productos .btn-danger {
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Cards estilo mosaico profesional */
+#productos .producto-card {
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+  background: #fff;
+}
+
+#productos .producto-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor de imagen con overlay */
+#productos .image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+#productos .card-img-top {
   width: 100%;
-  height: 220px;       /* Alto fijo */
-  object-fit: cover;   /* Recorte proporcional */
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
+#productos .producto-card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+/* Overlay con el nombre del producto */
+#productos .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 30px 15px 15px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+#productos .producto-card:hover .overlay {
+  transform: translateY(0);
+}
+
+#productos .overlay h6 {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* Responsive */
 @media (min-width: 768px) {
-  #productos .card img {
-    height: 250px;
+  #productos .card-img-top {
+    height: 240px;
+  }
+  
+  #productos .overlay h6 {
+    font-size: 1rem;
   }
 }
 
 @media (min-width: 1200px) {
-  #productos .card img {
-    height: 280px;
+  #productos .card-img-top {
+    height: 260px;
   }
 }
 
+/* Animación de entrada */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* Stagger animation para las cards */
+#productos .producto-card:nth-child(1) { animation-delay: 0.1s; }
+#productos .producto-card:nth-child(2) { animation-delay: 0.2s; }
+#productos .producto-card:nth-child(3) { animation-delay: 0.3s; }
+#productos .producto-card:nth-child(4) { animation-delay: 0.4s; }
+#productos .producto-card:nth-child(5) { animation-delay: 0.5s; }
+#productos .producto-card:nth-child(6) { animation-delay: 0.6s; }
+#productos .producto-card:nth-child(7) { animation-delay: 0.7s; }
+#productos .producto-card:nth-child(8) { animation-delay: 0.8s; }
