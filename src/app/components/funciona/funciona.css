@@ -1,0 +1,44 @@
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .step-box {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .step-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .step-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #dc3545;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-top: 0.5rem;
+    }
+
+    .step-img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 576px) {
+      .step-number {
+        font-size: 1.8rem;
+      }
+
+      .step-box {
+        padding: 1.5rem;
+      }
+    }

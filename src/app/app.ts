@@ -1,10 +1,6 @@
 
 import { Component, signal } from '@angular/core';
-
-import { InicioComponent } from './components/inicio/inicio';
-import { ProductosComponent } from './components/productos/productos';
-import { FuncionaComponent } from './components/funciona/funciona';
-import { ContactoComponent } from './components/contacto/contacto';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar';
 import { FooterComponent } from './components/footer/footer';
 import { RouterOutlet } from '@angular/router'; 
@@ -16,7 +12,8 @@ import { RouterOutlet } from '@angular/router';
 
     NavbarComponent,
     FooterComponent,
-    RouterOutlet 
+    RouterOutlet,
+    ReactiveFormsModule 
 ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']

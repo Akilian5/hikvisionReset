@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contacto - Hikvision Reset</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-
 <section class="py-5 animate__animated animate__fadeIn">
   <div class="container">
     <div class="text-center mb-5">
@@ -21,30 +9,109 @@
       <!-- Formulario -->
       <div class="col-lg-7">
         <div class="card shadow border-0 p-4">
-          <form id="contactForm">
+          
+          <!-- Debug Info (remover en producción) -->
+          <div class="alert alert-info" *ngIf="false">
+            <small>
+              Debug - Estado del formulario: {{ contactForm.valid ? 'Válido' : 'Inválido' }} | 
+              Submitted: {{ isSubmitted }}
+            </small>
+          </div>
+
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Nombre -->
             <div class="mb-3">
-              <label class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" placeholder="Tu nombre" id="nombre">
+              <label class="form-label">Nombre completo *</label>
+              <input 
+                type="text" 
+                class="form-control"
+                [class.is-invalid]="hasError('nombre')"
+                [class.is-valid]="isValid('nombre')"
+                formControlName="nombre"
+                placeholder="Tu nombre completo">
+              <div class="invalid-feedback" *ngIf="hasError('nombre')">
+                {{ getErrorMessage('nombre') }}
+              </div>
             </div>
+
+            <!-- Correo -->
             <div class="mb-3">
-              <label class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" placeholder="tunombre@ejemplo.com" id="correo">
+              <label class="form-label">Correo electrónico *</label>
+              <input 
+                type="email" 
+                class="form-control"
+                [class.is-invalid]="hasError('correo')"
+                [class.is-valid]="isValid('correo')"
+                formControlName="correo"
+                placeholder="tunombre@ejemplo.com">
+              <div class="invalid-feedback" *ngIf="hasError('correo')">
+                {{ getErrorMessage('correo') }}
+              </div>
             </div>
+
+            <!-- Teléfono -->
             <div class="mb-3">
               <label class="form-label">Teléfono (opcional)</label>
-              <input type="tel" class="form-control" placeholder="+57 300 123 4567" id="telefono">
+              <input 
+                type="tel" 
+                class="form-control"
+                formControlName="telefono"
+                placeholder="+57 300 123 4567">
+              <small class="form-text text-muted">Opcional - nos ayuda a contactarte más rápido</small>
             </div>
+
+            <!-- Cantidad -->
             <div class="mb-3">
-              <label class="form-label">Número de dispositivos</label>
-              <input type="number" class="form-control" placeholder="1, 2, 3, 4" min="1" id="cantidad">
+              <label class="form-label">Número de dispositivos *</label>
+              <input 
+                type="number" 
+                class="form-control"
+                [class.is-invalid]="hasError('cantidad')"
+                [class.is-valid]="isValid('cantidad')"
+                formControlName="cantidad"
+                placeholder="1, 2, 3, 4" 
+                min="1" 
+                max="50">
+              <div class="invalid-feedback" *ngIf="hasError('cantidad')">
+                {{ getErrorMessage('cantidad') }}
+              </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Mensaje</label>
-              <textarea class="form-control" rows="4" placeholder="Cuéntanos cómo podemos ayudarte..." id="mensaje"></textarea>
+
+            <!-- Mensaje -->
+            <div class="mb-4">
+              <label class="form-label">Mensaje *</label>
+              <textarea 
+                class="form-control"
+                [class.is-invalid]="hasError('mensaje')"
+                [class.is-valid]="isValid('mensaje')"
+                formControlName="mensaje"
+                rows="4" 
+                placeholder="Cuéntanos qué tipo de dispositivo tienes, qué problema presentas, etc."></textarea>
+              <div class="invalid-feedback" *ngIf="hasError('mensaje')">
+                {{ getErrorMessage('mensaje') }}
+              </div>
+              <small class="form-text text-muted">Mínimo 10 caracteres</small>
             </div>
-            <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#confirmModal">
-              Enviar mensaje
+
+            <!-- Botón de envío CORREGIDO -->
+            <button 
+              type="button" 
+              [class]="buttonClass"
+              [disabled]="!isFormValid"
+              data-bs-toggle="modal" 
+              [attr.data-bs-target]="isFormValid ? '#confirmModal' : null"
+              (click)="!isFormValid && markAllFieldsTouched()">
+              <i class="bi bi-send-fill me-2"></i>
+              {{ buttonText }}
             </button>
+
+            <!-- Indicador de campos obligatorios -->
+            <small class="form-text text-muted mt-3 d-block text-center">
+              <i class="bi bi-info-circle me-1"></i>
+              Los campos marcados con * son obligatorios
+            </small>
+
           </form>
         </div>
       </div>
@@ -53,20 +120,19 @@
       <div class="col-lg-5">
         <div class="card border-0 shadow-sm p-4 h-100">
           <h5 class="mb-3"><i class="bi bi-telephone-fill me-2"></i>Contáctanos directamente</h5>
-           <a 
-  href="https://wa.me/573207836286?text=Hola%2C%20quiero%20más%20información%20sobre%20el%20restablecimiento%20de%20mi%20dispositivo%20Hikvision." 
-  target="_blank" 
-  class="btn btn-success">
-  WhatsApp
-</a>
-          <hr>
+          <a 
+            href="https://wa.me/573207836286?text=Hola%2C%20quiero%20más%20información%20sobre%20el%20restablecimiento%20de%20mi%20dispositivo%20Hikvision." 
+            target="_blank" 
+            class="btn btn-success mb-3">
+            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+          </a>
+          
           <a
-  href="https://mail.google.com/mail/?view=cm&to=ejemplo3@gmail.com&su=Consulta%20Hikvision&body=Hola,%20necesito%20ayuda%20con%20mi%20dispositivo.%20Gracias."
-  class="btn btn-primary"
-  target="_blank"
->
-  ✉️ Correo (Gmail)
-</a>
+            href="https://mail.google.com/mail/?view=cm&to=ejemplo3@gmail.com&su=Consulta%20Hikvision&body=Hola,%20necesito%20ayuda%20con%20mi%20dispositivo.%20Gracias."
+            class="btn btn-primary mb-3"
+            target="_blank">
+            <i class="bi bi-envelope-fill me-2"></i>Correo (Gmail)
+          </a>
 
           <hr>
 
@@ -96,65 +162,35 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-4">
       <div class="modal-header border-0">
-        <h5 class="modal-title" id="confirmModalLabel">¿Cómo deseas contactarnos?</h5>
+        <h5 class="modal-title" id="confirmModalLabel">
+          <i class="bi bi-check-circle-fill text-success me-2"></i>
+          ¿Cómo deseas contactarnos?
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center">
-        <p>¿Prefieres comunicarte vía WhatsApp o Correo electrónico?</p>
-        <div class="d-flex justify-content-center gap-3">
-          <a 
-  href="https://wa.me/573207836286?text=Hola%2C%20quiero%20más%20información%20sobre%20el%20restablecimiento%20de%20mi%20dispositivo%20Hikvision." 
-  target="_blank" 
-  class="btn btn-success">
-  WhatsApp
-</a>
+        <p>Tu información está lista. Elige tu método preferido de contacto:</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <button 
+            type="button"
+            class="btn btn-success"
+            (click)="enviarWhatsApp()"
+            data-bs-dismiss="modal">
+            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+          </button>
 
-
-<a
-  href="https://mail.google.com/mail/?view=cm&to=ejemplo34@gmail.com&su=Consulta%20Hikvision&body=Hola,%20necesito%20ayuda%20con%20mi%20dispositivo.%20Gracias."
-  class="btn btn-primary"
-  target="_blank"
->
-  ✉️ Correo (Gmail)
-</a>
-
-
-
-
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="enviarCorreo()"
+            data-bs-dismiss="modal">
+            <i class="bi bi-envelope-fill me-2"></i>Correo
+          </button>
         </div>
+        <small class="text-muted d-block mt-3">
+          Se abrirá la aplicación correspondiente con tu información pre-cargada
+        </small>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Bootstrap JS + lógica  -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const whatsappBtn = document.getElementById('whatsappBtn');
-  const correoBtn = document.getElementById('correoBtn');
-
-  whatsappBtn.addEventListener('click', () => {
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const correo = document.getElementById('correo').value;
-    const cantidad = document.getElementById('cantidad').value;
-    const mensaje = document.getElementById('mensaje').value;
-
-    const texto = `Hola, mi nombre es ${nombre}. Mi número es ${telefono || '(no proporcionado)'}. Necesito restablecer ${cantidad || '1'} dispositivos. Mi correo es ${correo}. Mensaje: ${mensaje}`;
-
-    const url = `https://wa.me/573001234567?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-  });
-
-  correoBtn.addEventListener('click', () => {
-    const correo = document.getElementById('correo').value;
-    const asunto = "Consulta desde formulario de contacto";
-    const mensaje = document.getElementById('mensaje').value;
-    const body = encodeURIComponent(mensaje);
-
-    window.location.href = `mailto:Hikvison@gmail.com?subject=${asunto}&body=${body}`;
-  });
-</script>
-
-</body>
-</html>
