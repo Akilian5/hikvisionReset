@@ -109,7 +109,7 @@ export class ContactoComponent implements OnInit {
     return this.isFormValid ? 'btn btn-danger w-100' : 'btn btn-secondary w-100';
   }
 
-  // Función para marcar todos los campos como touched (útil para debugging)
+  // Función para marcar todos los campos como touched 
   markAllFieldsTouched() {
     Object.keys(this.contactForm.controls).forEach(field => {
       const control = this.contactForm.get(field);
@@ -126,10 +126,10 @@ export class ContactoComponent implements OnInit {
       const formData = this.contactForm.value;
       const mensaje = `Hola, mi nombre es ${formData.nombre}, mi número es ${formData.telefono || '(no proporcionado)'}, necesito restablecer ${formData.cantidad} dispositivos. Mi correo es ${formData.correo}. Mensaje adicional: ${formData.mensaje}`;
       
-      const whatsappUrl = `https://wa.me/573207836286?text=${encodeURIComponent(mensaje)}`;
+      const whatsappUrl = `https://wa.me/573155210979?text=${encodeURIComponent(mensaje)}`;
       window.open(whatsappUrl, '_blank');
       
-      // Opcional: Resetear formulario después del envío
+      // Resetear formulario después del envío
       this.resetForm();
     } else {
       console.log('Formulario inválido:', this.contactForm.errors);
@@ -137,30 +137,94 @@ export class ContactoComponent implements OnInit {
     }
   }
 
-  // Enviar por Correo
+  // Función mejorada para enviar por correo
   enviarCorreo() {
     this.isSubmitted = true;
     this.markAllFieldsTouched();
     
     if (this.contactForm.valid) {
       const formData = this.contactForm.value;
-      const asunto = `Consulta de ${formData.nombre} - ${formData.cantidad} dispositivos`;
-      const cuerpo = `Nombre: ${formData.nombre}
+      
+     
+      const asunto = `Consulta Hikvision - ${formData.nombre}`;
+      
+   
+      const cuerpoTexto = `Nombre: ${formData.nombre}%0D%0A` +
+                         `Correo: ${formData.correo}%0D%0A` +
+                         `Telefono: ${formData.telefono || 'No proporcionado'}%0D%0A` +
+                         `Dispositivos: ${formData.cantidad}%0D%0A%0D%0A` +
+                         `Mensaje:%0D%0A${formData.mensaje}`;
+
+      // Crear la URL mailto
+      const mailtoUrl = `mailto:akilian182@gmail.com?subject=${encodeURIComponent(asunto)}&body=${cuerpoTexto}`;
+      
+      try {
+      
+        window.location.href = mailtoUrl;
+        
+       
+        
+        console.log('Correo enviado correctamente');
+        
+        // Resetear formulario después del envío
+        setTimeout(() => {
+          this.resetForm();
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Error al abrir cliente de correo:', error);
+        
+        // Fallback: Mostrar información para copiar manualmente
+        this.mostrarInformacionCorreo(formData);
+      }
+    } else {
+      console.log('Formulario inválido:', this.contactForm.errors);
+      this.logFormErrors();
+    }
+  }
+
+  // Función fallback para mostrar información si falla mailto
+  private mostrarInformacionCorreo(formData: any) {
+    const mensaje = `Por favor copia esta información y envíala manualmente a akilian182@gmail.com:
+
+Asunto: Consulta Hikvision - ${formData.nombre}
+
+Nombre: ${formData.nombre}
 Correo: ${formData.correo}
-Teléfono: ${formData.telefono || '(no proporcionado)'}
+Teléfono: ${formData.telefono || 'No proporcionado'}
 Cantidad de dispositivos: ${formData.cantidad}
 
 Mensaje:
 ${formData.mensaje}`;
 
-      const mailtoUrl = `mailto:ejemplo3@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-      window.open(mailtoUrl, '_blank');
+    alert(mensaje);
+  }
+
+  // ALTERNATIVA SIMPLE: Siempre usar Gmail Web
+  enviarCorreoSimple() {
+    this.isSubmitted = true;
+    this.markAllFieldsTouched();
+    
+    if (this.contactForm.valid) {
+      const formData = this.contactForm.value;
       
-      // Opcional: Resetear formulario después del envío
+      const asunto = `Consulta Hikvision - ${formData.nombre}`;
+      const cuerpo = `Nombre: ${formData.nombre}
+Correo: ${formData.correo}
+Teléfono: ${formData.telefono || 'No proporcionado'}
+Cantidad de dispositivos: ${formData.cantidad}
+
+Mensaje:
+${formData.mensaje}`;
+
+    
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&to=akilian182@gmail.com&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      
+      window.open(gmailUrl, '_blank');
+      
+     
+      // Resetear formulario
       this.resetForm();
-    } else {
-      console.log('Formulario inválido:', this.contactForm.errors);
-      this.logFormErrors();
     }
   }
 
